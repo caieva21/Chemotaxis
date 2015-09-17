@@ -55,4 +55,4 @@ class Food
     ellipse (foodX, foodY, 10, 10);
   }
 }
-}
+
