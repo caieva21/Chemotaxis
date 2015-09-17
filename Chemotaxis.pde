@@ -1,4 +1,5 @@
 Bacteria david = new Bacteria(400, 400, 0, 0, 0);
+Food poop = new Food ();
 void setup()   
 {  
   size (800, 800);
@@ -15,7 +16,11 @@ void draw()
     Food ooo = new Food();
     ooo.show();
   }
-}  
+}
+void mousePressed()
+{
+poop.newLocation ();
+}
 class Bacteria    
 {     
   int myX, myY, mySize, myColorR, myColorB, myColorG;
@@ -53,6 +58,11 @@ class Food
   {
     fill (255);
     ellipse (foodX, foodY, 10, 10);
+  }
+  void foodLocation
+  {
+  foodX = mouseX;
+  foodY = mouseY;
   }
 }
 
