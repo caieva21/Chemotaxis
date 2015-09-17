@@ -1,9 +1,8 @@
-Bacteria david = new Bacteria(400,400,0,0,0);
+Bacteria david = new Bacteria(400, 400, 0, 0, 0);
 void setup()   
 {  
   size (800, 800);
   //frameRate (100);
-  
 }   
 void draw()   
 {    
@@ -16,7 +15,6 @@ void draw()
     Food ooo = new Food();
     ooo.show();
   }
-  
 }  
 class Bacteria    
 {     
@@ -45,19 +43,16 @@ class Bacteria
 }  
 class Food
 {
-  int foodX,  foodY;
+  int foodX, foodY;
   Food ()
   {
-    foodX = mouseX;
-    foodY = mouseY;
+    foodX = 100;
+    foodY = 100;
   }
   void show ()
   {
-    if (mousePressed == true)
-    {
-      fill (255);
-      ellipse (foodX, foodY, 10, 10);
-    }
-    
+    fill (255);
+    ellipse (foodX, foodY, 10, 10);
   }
+}
 }
