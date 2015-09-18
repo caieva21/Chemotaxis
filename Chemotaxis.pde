@@ -1,6 +1,5 @@
 Bacteria david = new Bacteria(400, 400, 0, 0, 0);
 Food poop = new Food ();
-boolean needMoreFood;
 void setup()   
 {  
   size (800, 800);
@@ -12,15 +11,16 @@ void draw()
   background (255);
   david.show();
   david.walk();
-  poop.show ();
+  poop.show();
   if (mousePressed == true)
   {
     Food poop = new Food();
   }
   if (david.myX == poop.foodX && david.myY == poop.foodY)
-  {
-    needMoreFood = true;
-  }
+    {
+      poop.beenEaten = true;
+      Food poop = new Food ();
+    }
 }
 void mousePressed()
 {
@@ -28,7 +28,7 @@ void mousePressed()
 }
 class Bacteria    
 {     
-  int myX, myY, mySize, myColorR, myColorB, myColorG;
+  int myX, myY, mySize, myColorR, myColorB, myColorG, choice;
   Bacteria(int x, int y, int colorZ, int colorX, int colorC) 
   {
     myX = x;
@@ -47,42 +47,66 @@ class Bacteria
   }
   void walk()
   {
-    if (myX > poop.foodX)
+    if (poop.beenEaten == false)
     {
-      myX = myX + (int) (Math.random()*3)-2;
-    } else
-    {
-      myX = myX + (int) (Math.random()*3);
-    }
-    if (myY > poop.foodY)
-    {
-      myY = myY + (int) (Math.random()*3)-2;
+      if (myX > poop.foodX)
+      {
+        myX = myX -1;
+      } else
+      {
+        myX = myX + 1;
+      }
+      if (myY > poop.foodY)
+      {
+        myY = myY -1;
+      } else 
+      {
+        myY = myY + 1;
+      }
     } else 
     {
-      myY = myY + (int) (Math.random()*3);
+      choice = (int)(Math.random()*4);
+      if (choice == 0)
+        myX = myX + 5;
+      if (choice == 1)
+        myY = myY + 5;
+      if (choice == 2)
+        myX = myX -5;
+      if (choice == 3)
+        myY = myY -5;
     }
   }
 }  
+
 class Food
 {
-  int foodX, foodY;
+  int foodX, foodY, rgb;
+  boolean beenEaten;
   Food ()
   {
     foodX = 100;
     foodY = 100;
+    beenEaten = false;
+    rgb = 0;
   }
   void show ()
   {
-    fill (0);
-    ellipse (foodX, foodY, 10, 10);
-    if (needMoreFood == true)
+    if (beenEaten == true)
+    { 
+      noStroke();
+      poop.rgb = 255;
+    } else
     {
-      stroke(255);
-      fill (255);
+      stroke (0);
+      poop.rgb = 0;
     }
+    fill (rgb);
+    ellipse (foodX, foodY, 10, 10);
+    
   }
   void foodLocation ()
   {
+
     foodX = mouseX;
     foodY = mouseY;
   }
