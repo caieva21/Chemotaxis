@@ -1,5 +1,6 @@
 Bacteria david = new Bacteria(400, 400, 0, 0, 0);
 Food poop = new Food ();
+boolean needMoreFood;
 void setup()   
 {  
   size (800, 800);
@@ -11,15 +12,19 @@ void draw()
   background (255);
   david.show();
   david.walk();
+  poop.show ();
   if (mousePressed == true)
   {
-    Food ooo = new Food();
-    ooo.show();
+    Food poop = new Food();
+  }
+  if (david.myX == poop.foodX && david.myY == poop.foodY)
+  {
+    needMoreFood = true;
   }
 }
 void mousePressed()
 {
-poop.newLocation ();
+  poop.foodLocation ();
 }
 class Bacteria    
 {     
@@ -42,8 +47,20 @@ class Bacteria
   }
   void walk()
   {
-    myX = myX + (int) (Math.random ()*3)-1;
-    myY = myY + (int) (Math.random ()*3)-1;
+    if (myX > poop.foodX)
+    {
+      myX = myX + (int) (Math.random()*3)-2;
+    } else
+    {
+      myX = myX + (int) (Math.random()*3);
+    }
+    if (myY > poop.foodY)
+    {
+      myY = myY + (int) (Math.random()*3)-2;
+    } else 
+    {
+      myY = myY + (int) (Math.random()*3);
+    }
   }
 }  
 class Food
@@ -56,13 +73,17 @@ class Food
   }
   void show ()
   {
-    fill (255);
+    fill (0);
     ellipse (foodX, foodY, 10, 10);
+    if (needMoreFood == true)
+    {
+      stroke(255);
+      fill (255);
+    }
   }
-  void foodLocation
+  void foodLocation ()
   {
-  foodX = mouseX;
-  foodY = mouseY;
+    foodX = mouseX;
+    foodY = mouseY;
   }
 }
-
