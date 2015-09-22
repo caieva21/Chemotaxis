@@ -1,110 +1,87 @@
-Bacteria david = new Bacteria(400, 400, 0, 0, 0);
-Food poop = new Food (mouseX, mouseY);
+Bacteria []david;
+Food poop = new Food();
+int i = 0;
 void setup()   
 {  
   size (800, 800);
-  //frameRate (100);
+  david = new Bacteria [500];
+  for (int i = 1; i<=500; i++)
+  {
+    Bacteria david[i] = new Bacteria;
+  }
 }   
 void draw()   
 {    
-  //move and show the bacteria
   background (255);
-  david.show();
-  david.walk();
+  david[i].show();
+  david[i].walk();
   poop.show();
-  //if (mousePressed == true)
-  //{
-    //Food poop = new Food();
-  //}
-  if (david.myX == poop.foodX && david.myY == poop.foodY)
-    {
-      poop.beenEaten = true;
-    }
-}
-void mousePressed()
-{
-  Food poop = new Food (mouseX, mouseY);
-  poop.show();
-  poop.foodLocation();
+  if (david[i].myX == poop.foodX && david[i].myY == poop.foodY)
+  {
+    poop.foodLocation ();
+    david[i].mySize = david[i].mySize + 10;
+  }
+  if (i<500 && i>0 && david[i].mySize == 40)
+  {
+    Bacteria david[i] = new Bacteria;
+  }
 }
 class Bacteria    
 {     
-  int myX, myY, mySize, myColorR, myColorB, myColorG, choice;
-  Bacteria(int x, int y, int colorZ, int colorX, int colorC) 
+  int myX, myY, mySize, myColor1, myColor2, myColor3, choice;
+  Bacteria(int x, int y) 
   {
     myX = x;
     myY = y;
-    myColorR = colorZ;
-    myColorG = colorX;
-    myColorB = colorC;
+    myColor1= (int)(Math.random()*800);
+    myColor2= (int)(Math.random()*800);
+    myColor3= (int)(Math.random()*800);
     mySize = 20;
   }
   void show()
   {
     noFill();
     strokeWeight (2);
-    stroke(myColorR, myColorG, myColorB);
+    stroke(myColor1, myColor2, myColor3);
     ellipse (myX, myY, mySize, mySize);
   }
   void walk()
   {
-    if (poop.beenEaten == false)
+    if (myX > poop.foodX)
     {
-      if (myX > poop.foodX)
-      {
-        myX = myX + (int) (Math.random()*3)-2;
-      } else
-      {
-        myX = myX + (int)(Math.random()*3);
-      }
-      if (myY > poop.foodY)
-      {
-        myY = myY + (int)(Math.random()*3)-2;
-      } else 
-      {
-        myY = myY + (int)(Math.random()*3);
-      }
+      myX = myX + (int) (Math.random()*3)-2;
+    } else
+    {
+      myX = myX + (int)(Math.random()*3);
+    }
+    if (myY > poop.foodY)
+    {
+      myY = myY + (int)(Math.random()*3)-2;
     } else 
     {
-      choice = (int)(Math.random()*4);
-      if (choice == 0)
-        myX = myX + 2;
-      if (choice == 1)
-        myY = myY + 2;
-      if (choice == 2)
-        myX = myX -2;
-      if (choice == 3)
-        myY = myY -2;
+      myY = myY + (int)(Math.random()*3);
     }
   }
 }  
 
 class Food
 {
-  int foodX, foodY, rgb;
-  boolean beenEaten;
-  Food (int fX, int fY)
+  int foodX, foodY;
+  Food ()
   {
-    foodX = fX;
-    foodY = fY;
-    beenEaten = false;
-    rgb = 0;
+    foodX = (int)(Math.random()*800);
+    foodY = (int)(Math.random()*800);
   }
   void show ()
   {
-    if (beenEaten == true)
-    { 
-     foodX = 900;
-     foodY = 900;
-    } 
-    fill (rgb);
+    fill (0);
+    stroke (0);
     ellipse (foodX, foodY, 10, 10);
-    
   }
   void foodLocation ()
   {
 
-    foodX = mouseX;
-    foodY = mouseY;
+    foodX =(int)(Math.random()*800);
+    foodY = (int)(Math.random()*800);
   }
 }
