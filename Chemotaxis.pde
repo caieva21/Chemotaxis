@@ -1,41 +1,47 @@
 Bacteria []david;
 Food poop = new Food();
-int i = 0;
+int i = 1;
 void setup()   
 {  
   size (800, 800);
   david = new Bacteria [500];
-  for (int i = 1; i<=500; i++)
+  for (int i = 0; i<=499; i++)
   {
-    Bacteria david[i] = new Bacteria;
+    david[i] = new Bacteria();
   }
 }   
 void draw()   
 {    
   background (255);
-  david[i].show();
-  david[i].walk();
   poop.show();
-  if (david[i].myX == poop.foodX && david[i].myY == poop.foodY)
+  for (int k = 0; k< i; k++)
   {
-    poop.foodLocation ();
-    david[i].mySize = david[i].mySize + 10;
-  }
-  if (i<500 && i>0 && david[i].mySize == 40)
-  {
-    Bacteria david[i] = new Bacteria;
+    david[i].show();
+    david[i].walk();
+    if (david[i].myX == poop.foodX && david[i].myY == poop.foodY)
+    {
+      poop.foodLocation ();
+      david[i].mySize = david[i].mySize + 10;
+
+      if (david[i].mySize == 40) 
+      {
+        david[i] = new Bacteria();
+        david[i].mySize = 20;
+        i++;
+      }
+    }
   }
 }
 class Bacteria    
 {     
   int myX, myY, mySize, myColor1, myColor2, myColor3, choice;
-  Bacteria(int x, int y) 
+  Bacteria() 
   {
-    myX = x;
-    myY = y;
-    myColor1= (int)(Math.random()*800);
-    myColor2= (int)(Math.random()*800);
-    myColor3= (int)(Math.random()*800);
+    myX = (int)(Math.random()*800);
+    myY = (int)(Math.random()*800);
+    myColor1= (int)(Math.random()*255);
+    myColor2= (int)(Math.random()*255);
+    myColor3= (int)(Math.random()*255);
     mySize = 20;
   }
   void show()
