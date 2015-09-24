@@ -5,9 +5,10 @@ void setup()
 {  
   size (800, 800);
   david = new Bacteria [500];
-  for (int i = 0; i<=499; i++)
+  for (int j = 0; j<i; j++)
   {
-    david[i] = new Bacteria();
+    david[j] = new Bacteria();
+    david[j].bacteria();
   }
 }   
 void draw()   
@@ -16,26 +17,28 @@ void draw()
   poop.show();
   for (int k = 0; k< i; k++)
   {
-    david[i].show();
-    david[i].walk();
-    if (david[i].myX == poop.foodX && david[i].myY == poop.foodY)
+    david[k].show();
+    david[k].walk();
+    if (david[k].myX == poop.foodX && david[k].myY == poop.foodY)
     {
       poop.foodLocation ();
-      david[i].mySize = david[i].mySize + 10;
+      david[k].mySize = david[k].mySize + 10;
 
-      if (david[i].mySize == 40) 
+      if (david[k].mySize == 40) 
       {
         david[i] = new Bacteria();
-        david[i].mySize = 20;
+        david [i].bacteria();
+        david[k].mySize = 20;
         i++;
       }
     }
   }
 }
+
 class Bacteria    
 {     
   int myX, myY, mySize, myColor1, myColor2, myColor3, choice;
-  Bacteria() 
+  void bacteria() 
   {
     myX = (int)(Math.random()*800);
     myY = (int)(Math.random()*800);
